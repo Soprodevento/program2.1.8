@@ -47,59 +47,51 @@ public class Robot {
     }
 
     public void stepForward() {
-        switch(dir) {
-            case Direction.UP   : y++; break;
-            case Direction.DOWN : y--; break;
-            case Direction.LEFT : x--; break;
-            case Direction.RIGHT: x++; break;
+        switch (dir) {
+            case Direction.UP:
+                y++;
+                break;
+            case Direction.DOWN:
+                y--;
+                break;
+            case Direction.LEFT:
+                x--;
+                break;
+            case Direction.RIGHT:
+                x++;
+                break;
         }
     }
 
     public static void moveRobot(Robot robot, int toX, int toY) {
-
-        int dirX = robot.getX();
-        int dirY = robot.getY();
-
-        System.out.println("Начальная позиция " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
-
-        if (dirY >= toY) {
-            while (robot.getDirection() != Direction.DOWN) {
-                robot.turnLeft();
-            }
-            while (dirY != toY) {
-                robot.stepForward();
-                System.out.println("dirY >= toY " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
-                dirY--;
-            }
-
-        } else {
-            while (robot.getDirection() != Direction.UP) {
-                robot.turnRight();
-            }
-            while (dirY != toY) {
-                robot.stepForward();
-                System.out.println("dirY <= toY " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
-                dirY++;
-            }
-        }
-        if (dirX >= toX) {
-            while (robot.getDirection() != Direction.LEFT) {
-                robot.turnLeft();
-            }
-            while (dirX != toX) {
-                robot.stepForward();
-                System.out.println("dirX >= toX " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
-                dirX--;
-            }
-        } else {
+        int dx = toX - robot.getX();
+        int dy = toY - robot.getY();
+        if (dx > 0) {
             while (robot.getDirection() != Direction.RIGHT) {
                 robot.turnRight();
             }
-            while (dirX != toX) {
-                robot.stepForward();
-                System.out.println("dirX <= toX " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
-                dirX++;
+        } else if (dx < 0) {
+            while (robot.getDirection() != Direction.LEFT) {
+                robot.turnLeft();
             }
+        }
+
+        for (int i = 0; i < Math.abs(dx); i++) {
+            robot.stepForward();
+        }
+
+        if (dy > 0) {
+            while (robot.getDirection() != Direction.UP) {
+                robot.turnRight();
+            }
+        } else if (dy < 0) {
+            while (robot.getDirection() != Direction.DOWN) {
+                robot.turnLeft();
+            }
+        }
+
+        for (int i = 0; i < Math.abs(dy); i++) {
+            robot.stepForward();
         }
     }
 }

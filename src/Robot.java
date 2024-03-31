@@ -59,7 +59,7 @@ public class Robot {
     }
 
     public static void moveRobot(Robot robot, int toX, int toY) {
-        System.out.println("Начальная позиция " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
+        System.out.println(robot.getX() + " " + robot.getY()  +" "+ robot.getDirection());
 
         if (robot.getY() != toY) {
             Direction verticalDirection = robot.getY() < toY ? Direction.UP : Direction.DOWN;
@@ -81,7 +81,7 @@ public class Robot {
             }
         }
 
-        System.out.println("Ending позиция " + robot.getX() + " " + robot.getY() + ". Направление взгляда: " + robot.getDirection());
+        System.out.println(robot.getX() + " " + robot.getY() + " " +  robot.getDirection());
     }
 
 }
